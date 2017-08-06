@@ -213,8 +213,13 @@ bindsym XF86AudioMute exec amixer -q set Master toggle
 bindsym $mod+f exec firefox
 bindsym $mod+g exec google-chrome-stable
 
+# Assign URxvt terminals to workspace 2
+assign [class="Google-chrome" instance="google-chrome"] 2 
+
 
 # Open desktop 1
-#
+exec --no-startup-id i3-msg 'workspace 1 ; exec terminator'
 # Open desktop 2
-exec ~/applications/Telegram/Telegram
+exec google-chrome-stable
+# Open desktop 3
+exec --no-startup-id i3-msg 'workspace 3 ; exec ~/applications/Telegram/Telegram'
