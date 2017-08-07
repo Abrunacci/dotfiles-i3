@@ -93,31 +93,41 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+# bindsym $mod+d focus child
+set $wsp1 workspace 1 
+set $wsp2 workspace 2 
+set $wsp3 workspace 3 
+set $wsp4 workspace 4 
+set $wsp5 workspace 5 
+set $wsp6 workspace 6 
+set $wsp7 workspace 7 
+set $wsp8 workspace 8 
+set $wsp9 workspace 9 
+set $wsp10 workspace 10 
 
 # switch to workspace
-bindsym $mod+1 workspace 1 
-bindsym $mod+2 workspace 2 
-bindsym $mod+3 workspace 3 
-bindsym $mod+4 workspace 4 
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+1 $wsp1
+bindsym $mod+2 $wsp2
+bindsym $mod+3 $wsp3
+bindsym $mod+4 $wsp4
+bindsym $mod+5 $wsp5
+bindsym $mod+6 $wsp6
+bindsym $mod+7 $wsp7
+bindsym $mod+8 $wsp8
+bindsym $mod+9 $wsp9
+bindsym $mod+0 $wsp10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1 
-bindsym $mod+Shift+2 move container to workspace 2 
-bindsym $mod+Shift+3 move container to workspace 3 
-bindsym $mod+Shift+4 move container to workspace 4  
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+1 move container to $wsp1
+bindsym $mod+Shift+2 move container to $wsp2
+bindsym $mod+Shift+3 move container to $wsp3
+bindsym $mod+Shift+4 move container to $wsp4
+bindsym $mod+Shift+5 move container to $wsp5
+bindsym $mod+Shift+6 move container to $wsp6
+bindsym $mod+Shift+7 move container to $wsp7
+bindsym $mod+Shift+8 move container to $wsp8
+bindsym $mod+Shift+9 move container to $wsp9
+bindsym $mod+Shift+0 move container to $wsp10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -213,13 +223,17 @@ bindsym XF86AudioMute exec amixer -q set Master toggle
 bindsym $mod+f exec firefox
 bindsym $mod+g exec google-chrome-stable
 
-# Assign URxvt terminals to workspace 2
-assign [class="Google-chrome" instance="google-chrome"] 2 
-
+# Assign Applications to workspaces
+assign [class="Google-chrome" instance="google-chrome"] $wsp2
+assign [class="Telegram" instance="Telegram"] $wsp3
+assign [class="^.*jetbrains-pycharm.*$"] $wsp4
 
 # Open desktop 1
-exec --no-startup-id i3-msg 'workspace 1 ; exec terminator'
+exec --no-startup-id i3-msg '$wsp1; exec terminator'
 # Open desktop 2
 exec google-chrome-stable
 # Open desktop 3
-exec --no-startup-id i3-msg 'workspace 3 ; exec ~/applications/Telegram/Telegram'
+exec --no-startup-id i3-msg '$wsp3; exec ~/applications/Telegram/Telegram'
+# Open desktop 4
+exec /home/ale/.local/share/JetBrains/Toolbox/apps/PyCharm-P/ch-0/172.3317.103/bin/pycharm.sh
+
