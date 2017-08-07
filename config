@@ -217,9 +217,12 @@ bindsym XF86AudioRaiseVolume exec amixer -q set Master 10%+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 10%- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
 
-# CUSTOM bindsym
+# PrintScreen
+# bindsym Print exec "scrot -s ~/Imágenes/screenshot-$(date +%Y%m%d%H%M%S).png"
+bindsym Shift+Mod1+Print exec "scrot -s 'screenshot-%Y%m%d_%H%M%S.png' -e 'mv $f ~/Imágenes/"
+bindsym Print exec caja
 
-# Open Firefox
+# Abrunacci's Shortcuts
 bindsym $mod+f exec firefox
 bindsym $mod+g exec google-chrome-stable
 
