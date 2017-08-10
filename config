@@ -96,14 +96,14 @@ bindsym $mod+a focus parent
 # bindsym $mod+d focus child
 set $wsp1 workspace 1 
 set $wsp2 workspace 2 
-set $wsp3 workspace 3 
+set $wsp3 workspace 3 
 set $wsp4 workspace 4 
-set $wsp5 workspace 5 
+set $wsp5 workspace 5 
 set $wsp6 workspace 6 
 set $wsp7 workspace 7 
 set $wsp8 workspace 8 
 set $wsp9 workspace 9 
-set $wsp10 workspace 10 
+set $wsp10 workspace 10 
 
 # switch to workspace
 bindsym $mod+1 $wsp1
@@ -193,11 +193,13 @@ bar {
     status_command i3status -c $HOME/.i3/i3status.conf
     position bottom
     #font xft:VarelaRound-Regular, FontAwesome 10
-    font xft:Exo, FontAwesome 10
+    font xft:DejaVu Sans Mono, FontAwesome 10
     #strip_workspace_numbers yes
-    separator_symbol ""
-    bindsym button4 nop
-    bindsym button5 nop
+    separator_symbol "|"
+    #bindsym button4 nop
+    #bindsym button5 nop
+    bindsym button4 exec exec amixer -q set Master 5%+ unmute
+    bindsym button5 exec exec amixer -q set Master 5%- unmute
     tray_padding 0
     colors {
         ## status
@@ -212,31 +214,54 @@ bar {
     }
 }
 
+# LeCoVi's Alt Tab behavior
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+bindsym Mod1+Tab workspace back_and_forth
+
 # Key volume
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 10%+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 10%- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
 
 # PrintScreen
-# bindsym Print exec "scrot -s ~/Imágenes/screenshot-$(date +%Y%m%d%H%M%S).png"
-bindsym Shift+Mod1+Print exec "scrot -s 'screenshot-%Y%m%d_%H%M%S.png' -e 'mv $f ~/Imágenes/"
-bindsym Print exec caja
+# Full Screen Caption
+bindsym Print exec scrot ~/Imágenes/screenshot-`date +%Y-%m-%d_%H:%M:%S`.png
+# Active Windows Caption
+bindsym --release Ctrl+Print exec scrot -u ~/Imágenes/screenshot-`date +%Y-%m-%d_%H:%M:%S`.png
+# Select Area Caption
+bindsym --release Shift+Print exec scrot -s ~/Imágenes/screenshot-`date +%Y-%m-%d_%H:%M:%S`.png 
+
+
+# Brightness 
+bindsym XF86BrightnessUp exec xbacklight -inc 10
+bindsym XF86BrightnessDown exec xbacklight -dec 10
 
 # Abrunacci's Shortcuts
 bindsym $mod+f exec firefox
 bindsym $mod+g exec google-chrome-stable
+bindsym $mod+c exec caja
 
 # Assign Applications to workspaces
 assign [class="Google-chrome" instance="google-chrome"] $wsp2
-assign [class="Telegram" instance="Telegram"] $wsp3
+assign [class="Rambox"] $wsp3
 assign [class="^.*jetbrains-pycharm.*$"] $wsp4
+assign [class="Caja"] $wsp10
+assign [class="KeeWeb"] $wsp5
+assign [class="Keepassx"] $wsp5
 
 # Open desktop 1
 exec --no-startup-id i3-msg '$wsp1; exec terminator'
 # Open desktop 2
 exec google-chrome-stable
 # Open desktop 3
-exec --no-startup-id i3-msg '$wsp3; exec ~/applications/Telegram/Telegram'
+exec --no-startup-id i3-msg '$wsp3; exec ~/applications/Rambox/rambox'
 # Open desktop 4
-exec /home/ale/.local/share/JetBrains/Toolbox/apps/PyCharm-P/ch-0/172.3317.103/bin/pycharm.sh
+exec --no-startup-id i3-msg '$wsp4; layout tabbed; /home/ale/.local/share/JetBrains/Toolbox/apps/PyCharm-P/ch-0/172.3317.103/bin/pycharm.sh'
+# Open desktop 5
+exec --no-startup-id i3-msg '$wsp5; layout tabbed; exec KeeWeb'
+exec --no-startup-id i3-msg '$wsp5; layout tabbed; exec keepassx'
 
+# Open applets
+exec nm-applet
+exec blueman-applet
