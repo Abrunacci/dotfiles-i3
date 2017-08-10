@@ -53,6 +53,8 @@ bindsym $mod+ntilde focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
+bindsym Ctrl+Mod1+Left move workspace to output left
+bindsym Ctrl+Mod1+Right move workspace to output right
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
@@ -94,16 +96,23 @@ bindsym $mod+a focus parent
 
 # focus the child container
 # bindsym $mod+d focus child
-set $wsp1 workspace 1 
-set $wsp2 workspace 2 
-set $wsp3 workspace 3 
-set $wsp4 workspace 4 
-set $wsp5 workspace 5 
-set $wsp6 workspace 6 
-set $wsp7 workspace 7 
-set $wsp8 workspace 8 
-set $wsp9 workspace 9 
-set $wsp10 workspace 10 
+set $wsp1 workspace "1 "
+set $wsp2 workspace "2 "
+set $wsp3 workspace "3 "
+set $wsp4 workspace "4 "
+set $wsp5 workspace "5 "
+set $wsp6 workspace "6 "
+set $wsp7 workspace "7 "
+set $wsp8 workspace "8 "
+set $wsp9 workspace "9 "
+set $wsp0 workspace "0 "
+
+# Screen layout
+$wsp1 output DVI-0
+$wsp2 output VGA-0
+$wsp3 output VGA-0
+$wsp4 output DVI-0
+$wsp5 output VGA-0
 
 # switch to workspace
 bindsym $mod+1 $wsp1
@@ -213,9 +222,9 @@ bar {
 }
 
 # Key volume
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 10%+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set Master 10%- unmute
-bindsym XF86AudioMute exec amixer -q set Master toggle
+bindsym $mod+KP_Add exec amixer -q set Master 10%+ unmute
+bindsym $mod+KP_Subtract exec amixer -q set Master 10%- unmute
+bindcode $mod+63 exec amixer -q set Master toggle
 
 # PrintScreen
 # bindsym Print exec "scrot -s ~/Imágenes/screenshot-$(date +%Y%m%d%H%M%S).png"
@@ -225,18 +234,27 @@ bindsym Print exec caja
 # Abrunacci's Shortcuts
 bindsym $mod+f exec firefox
 bindsym $mod+g exec google-chrome-stable
+bindsym Ctrl+Mod1+k exec KeeWeb
 
 # Assign Applications to workspaces
 assign [class="Google-chrome" instance="google-chrome"] $wsp2
 assign [class="Telegram" instance="Telegram"] $wsp3
 assign [class="^.*jetbrains-pycharm.*$"] $wsp4
+assign [class="^KeeWeb$"] $wsp5
 
 # Open desktop 1
 exec --no-startup-id i3-msg '$wsp1; exec terminator'
 # Open desktop 2
-exec google-chrome-stable
+exec --no-startup-id google-chrome-stable
 # Open desktop 3
-exec --no-startup-id i3-msg '$wsp3; exec ~/applications/Telegram/Telegram'
+exec --no-startup-id i3-msg '$wsp3; exec ~/Applications/Telegram/Telegram; $wsp2'
 # Open desktop 4
-exec /home/ale/.local/share/JetBrains/Toolbox/apps/PyCharm-P/ch-0/172.3317.103/bin/pycharm.sh
+exec --no-startup-id /home/ale/.local/share/JetBrains/Toolbox/apps/PyCharm-P/ch-0/172.3317.103/bin/pycharm.sh
+# Open desktop 5
+exec --no-startup-id KeeWeb; $wsp2
 
+# Fix screen position
+exec xrandr --auto --output VGA-0 --mode 1600x900 --right-of DVI-0
+
+exec $wsp2
+exec $wsp
