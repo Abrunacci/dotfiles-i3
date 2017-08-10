@@ -227,9 +227,12 @@ bindsym $mod+KP_Subtract exec amixer -q set Master 10%- unmute
 bindcode $mod+63 exec amixer -q set Master toggle
 
 # PrintScreen
-# bindsym Print exec "scrot -s ~/Imágenes/screenshot-$(date +%Y%m%d%H%M%S).png"
-bindsym Shift+Mod1+Print exec "scrot -s 'screenshot-%Y%m%d_%H%M%S.png' -e 'mv $f ~/Imágenes/"
-bindsym Print exec caja
+# Full Screen Caption
+ bindsym Print exec scrot ~/Imágenes/screenshot-`date +%Y-%m-%d_%H:%M:%S`.png
+# Active Windows Caption
+ bindsym --release Ctrl+Print exec scrot -u ~/Imágenes/screenshot-`date +%Y-%m-%d_%H:%M:%S`.png
+# Select Area Caption
+ bindsym --release Shift+Print exec scrot -s ~/Imágenes/screenshot-`date +%Y-%m-%d_%H:%M:%S`.png 
 
 # Abrunacci's Shortcuts
 bindsym $mod+f exec firefox
@@ -257,4 +260,4 @@ exec --no-startup-id KeeWeb; $wsp2
 exec xrandr --auto --output VGA-0 --mode 1600x900 --right-of DVI-0
 
 exec $wsp2
-exec $wsp
+exec $wsp1
