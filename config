@@ -98,15 +98,14 @@ bindsym $mod+a focus parent
 # bindsym $mod+d focus child
 set $wsp1 workspace "1 "
 set $wsp2 workspace "2 "
-set $wsp3 workspace "3 "
+set $wsp3 workspace "3 "
 set $wsp4 workspace "4 "
 set $wsp5 workspace "5 "
-set $wsp6 workspace "6 "
+set $wsp6 workspace "6 "
 set $wsp7 workspace "7 "
 set $wsp8 workspace "8 "
 set $wsp9 workspace "9 "
-set $wsp0 workspace "0 "
-
+set $wsp0 workspace "0 "
 # Screen layout
 $wsp1 output DVI-0
 $wsp2 output VGA-0
@@ -238,26 +237,35 @@ bindcode $mod+63 exec amixer -q set Master toggle
 bindsym $mod+f exec firefox
 bindsym $mod+g exec google-chrome-stable
 bindsym Ctrl+Mod1+k exec KeeWeb
+bindsym Ctrl+Mod1+l exec lock
+
 
 # Assign Applications to workspaces
 assign [class="Google-chrome" instance="google-chrome"] $wsp2
 assign [class="Telegram" instance="Telegram"] $wsp3
 assign [class="^.*jetbrains-pycharm.*$"] $wsp4
 assign [class="^KeeWeb$"] $wsp5
+assign [class="Rambox"] $wsp3
+assign [class="Caja"] $wsp0
 
 # Open desktop 1
 exec --no-startup-id i3-msg '$wsp1; exec terminator'
 # Open desktop 2
-exec --no-startup-id google-chrome-stable
+exec --no-startup-id google-chrome-stable http://horas.bitson.com.ar
 # Open desktop 3
-exec --no-startup-id i3-msg '$wsp3; exec ~/Applications/Telegram/Telegram; $wsp2'
+exec --no-startup-id ~/Applications/Rambox/rambox
 # Open desktop 4
 exec --no-startup-id /home/ale/.local/share/JetBrains/Toolbox/apps/PyCharm-P/ch-0/172.3317.103/bin/pycharm.sh
 # Open desktop 5
 exec --no-startup-id KeeWeb; $wsp2
+# Open desktop 6
+exec --no-startup-id i3-msg '$wsp6; exec firefox http://youtube.com'
 
 # Fix screen position
 exec xrandr --auto --output VGA-0 --mode 1600x900 --right-of DVI-0
+
+# Set Wallpapper
+exec_always "feh --bg-fill ~/Imágenes/wallpaper.jpg"
 
 exec $wsp2
 exec $wsp1
