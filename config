@@ -107,10 +107,10 @@ set $wsp8 workspace "8 "
 set $wsp9 workspace "9 "
 set $wsp0 workspace "0 "
 # Screen layout
-$wsp1 output DVI-0
+$wsp1 output HDMI-0
 $wsp2 output VGA-0
 $wsp3 output VGA-0
-$wsp4 output DVI-0
+$wsp4 output HDMI-0
 $wsp5 output VGA-0
 
 # switch to workspace
@@ -123,7 +123,19 @@ bindsym $mod+6 $wsp6
 bindsym $mod+7 $wsp7
 bindsym $mod+8 $wsp8
 bindsym $mod+9 $wsp9
-bindsym $mod+0 $wsp10
+bindsym $mod+0 $wsp0
+
+# switch to workspace (with numeric pad)
+bindcode $mod+87 $wsp1
+bindcode $mod+88 $wsp2
+bindcode $mod+89 $wsp3
+bindcode $mod+83 $wsp4
+bindcode $mod+84 $wsp5
+bindcode $mod+85 $wsp6
+bindcode $mod+79 $wsp7
+bindcode $mod+80 $wsp8
+bindcode $mod+81 $wsp9
+bindcode $mod+90 $wsp0
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to $wsp1
@@ -135,7 +147,19 @@ bindsym $mod+Shift+6 move container to $wsp6
 bindsym $mod+Shift+7 move container to $wsp7
 bindsym $mod+Shift+8 move container to $wsp8
 bindsym $mod+Shift+9 move container to $wsp9
-bindsym $mod+Shift+0 move container to $wsp10
+bindsym $mod+Shift+0 move container to $wsp0
+
+# move focused container to workspace (with numeric pad)
+bindcode $mod+Shift+87 move container to $wsp1
+bindcode $mod+Shift+88 move container to $wsp2
+bindcode $mod+Shift+89 move container to $wsp3
+bindcode $mod+Shift+83 move container to $wsp4
+bindcode $mod+Shift+84 move container to $wsp5
+bindcode $mod+Shift+85 move container to $wsp6
+bindcode $mod+Shift+79 move container to $wsp7
+bindcode $mod+Shift+80 move container to $wsp8
+bindcode $mod+Shift+81 move container to $wsp9
+bindcode $mod+Shift+90 move container to $wsp0
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -220,10 +244,12 @@ bar {
     }
 }
 
-# Key volume
-bindsym $mod+KP_Add exec amixer -q set Master 10%+ unmute
-bindsym $mod+KP_Subtract exec amixer -q set Master 10%- unmute
-bindcode $mod+63 exec amixer -q set Master toggle
+
+# Key volume (PC)
+bindsym $mod+KP_Add exec "amixer -q -c 0 set Master 1%+ unmute && amixer -q -c 3 set Headphone 1%+ unmute"
+bindsym $mod+KP_Subtract exec "amixer -q -c 0 set Master 1%- unmute && amixer -q -c 3 set Headphone 1%- unmute"
+bindcode $mod+63 exec "amixer -q -c 0 set Master toggle && amixer -q -c 3 set Headphone toggle"
+
 
 # PrintScreen
 # Full Screen Caption
@@ -260,9 +286,6 @@ exec --no-startup-id /home/ale/.local/share/JetBrains/Toolbox/apps/PyCharm-P/ch-
 exec --no-startup-id KeeWeb; $wsp2
 # Open desktop 6
 exec --no-startup-id i3-msg '$wsp6; exec firefox http://youtube.com'
-
-# Fix screen position
-exec xrandr --auto --output VGA-0 --mode 1600x900 --right-of DVI-0
 
 # Set Wallpapper
 exec_always "feh --bg-fill ~/Imágenes/wallpaper.jpg"
