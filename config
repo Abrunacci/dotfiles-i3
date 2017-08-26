@@ -263,7 +263,7 @@ mode "$mode_spotify_controls" {
 bindsym Ctrl+Shift+s mode "$mode_spotify_controls"
 
 # Abrunacci's Shortcuts
-bindsym Ctrl+Mod1+l exec lock -t "This aren't the droids you are looking for..."
+bindsym Ctrl+Mod1+l exec lock -f FreeMono -t "This aren't the droids you are looking for..." #You need to clone https://github.com/meskarune/i3lock-fancy.git
 bindsym $mod+f exec firefox
 bindsym $mod+g exec google-chrome-stable
 bindsym $mod+c exec caja
@@ -291,6 +291,7 @@ exec --no-startup-id i3-msg '$wsp5; layout tabbed; exec KeeWeb'
 exec --no-startup-id i3-msg '$wsp5; layout tabbed; exec keepassx'
 # Open desktop 6
 exec --no-startup-id exec spotify
+
 # Open applets
 exec nm-applet
 exec blueman-applet
