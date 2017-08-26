@@ -238,6 +238,7 @@ bindsym XF86BrightnessUp exec xbacklight -inc 10
 bindsym XF86BrightnessDown exec xbacklight -dec 10
 
 # Abrunacci's Shortcuts
+bindsym Ctrl+Mod1+l exec lock -t "This aren't the droids you are looking for..."
 bindsym $mod+f exec firefox
 bindsym $mod+g exec google-chrome-stable
 bindsym $mod+c exec caja
