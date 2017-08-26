@@ -237,6 +237,31 @@ bindsym --release Shift+Print exec scrot -s ~/Imágenes/screenshot-`date +%Y-%m-
 bindsym XF86BrightnessUp exec xbacklight -inc 10
 bindsym XF86BrightnessDown exec xbacklight -dec 10
 
+set $mode_system System (s) suspend, (r) reboot, (p) shutdown
+mode "$mode_system" {
+    bindsym s exec --no-startup-id systemctl suspend, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym p exec --no-startup-id systemctl poweroff, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym Shift+Escape mode "$mode_system"
+
+# Spotify Client Controls (clone https://github.com/mgarratt/spotify-control.git)
+set $mode_spotify_controls Controls (s) Start/Stop, (p) prev, (n) next
+mode "$mode_spotify_controls" {
+    bindsym n exec --no-startup-id spotify-control next, mode "default"
+    bindsym p exec --no-startup-id spotify-control prev, mode "default"
+    bindsym s exec --no-startup-id spotify-control play, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym Ctrl+Shift+s mode "$mode_spotify_controls"
+
 # Abrunacci's Shortcuts
 bindsym Ctrl+Mod1+l exec lock -t "This aren't the droids you are looking for..."
 bindsym $mod+f exec firefox
