@@ -251,7 +251,7 @@ mode "$mode_system" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym XF86PowerOff mode "$mode_system"
+bindsym Shift+Escape mode "$mode_system"
 
 # Spotify Client Controls (clone https://github.com/mgarratt/spotify-control.git)
 set $mode_spotify_controls Controls (s) Start/Stop, (p) prev, (n) next
@@ -267,7 +267,7 @@ mode "$mode_spotify_controls" {
 bindsym Ctrl+Shift+s mode "$mode_spotify_controls"
 
 # Abrunacci's Shortcuts
-bindsym Ctrl+Mod1+l exec lock -pf FreeMono-Negrita -t "This aren't the droids you are looking for..." #You need to clone https://github.com/meskarune/i3lock-fancy.git
+bindsym XF86ScreenSaver exec lock -pf FreeMono-Negrita -t "This aren't the droids you are looking for..." #You need to clone https://github.com/meskarune/i3lock-fancy.git
 bindsym $mod+f exec firefox
 bindsym $mod+g exec google-chrome-stable
 bindsym $mod+c exec caja
@@ -299,3 +299,9 @@ exec --no-startup-id exec spotify
 # Open applets
 exec nm-applet
 exec blueman-applet
+
+# Setting wallpaper
+# exec feh --randomize --bg-fill ~/.wallpaper/*
+exec feh --bg-max --randomize ~/.wallpaper/* &
+# Disable touchpad
+exec ~/.i3/block_touchpad.sh
