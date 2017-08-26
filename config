@@ -223,6 +223,10 @@ bindsym Mod1+Tab workspace back_and_forth
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 1%+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 1%- unmute
 bindsym XF86AudioMute exec amixer -q set Master toggle
+bindsym XF86AudioMicMute exec amixer -q set Capture toggle
+
+# Enable/Disable Touchpad
+bindcode 156 exec ~/.i3/block_touchpad.sh
 
 # PrintScreen
 # Full Screen Caption
@@ -247,7 +251,7 @@ mode "$mode_system" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym Shift+Escape mode "$mode_system"
+bindsym XF86PowerOff mode "$mode_system"
 
 # Spotify Client Controls (clone https://github.com/mgarratt/spotify-control.git)
 set $mode_spotify_controls Controls (s) Start/Stop, (p) prev, (n) next
