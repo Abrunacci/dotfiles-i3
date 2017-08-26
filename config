@@ -302,6 +302,7 @@ exec blueman-applet
 
 # Setting wallpaper
 # exec feh --randomize --bg-fill ~/.wallpaper/*
-exec feh --bg-max --randomize ~/.wallpaper/* &
+exec_always --no-startup-id "feh --randomize --bg-fill ~/Imágenes/wallpapers/* &"
+
 # Disable touchpad
 exec ~/.i3/block_touchpad.sh
