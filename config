@@ -259,7 +259,33 @@ bindcode $mod+63 exec "amixer -q -c 0 set Master toggle && amixer -q -c 3 set He
 # Select Area Caption
  bindsym --release Shift+Print exec scrot -s ~/Imágenes/screenshot-`date +%Y-%m-%d_%H:%M:%S`.png 
 
+set $mode_system System (s) suspend, (r) reboot, (p) shutdown
+mode "$mode_system" {
+    bindsym s exec --no-startup-id systemctl suspend, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym p exec --no-startup-id systemctl poweroff, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym Shift+Escape mode "$mode_system"
+
+# Spotify Client Controls (clone https://github.com/mgarratt/spotify-control.git)
+set $mode_spotify_controls Controls (s) Start/Stop, (p) prev, (n) next
+mode "$mode_spotify_controls" {
+    bindsym n exec --no-startup-id spotify-control next, mode "default"
+    bindsym p exec --no-startup-id spotify-control prev, mode "default"
+    bindsym s exec --no-startup-id spotify-control play, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym Ctrl+Shift+s mode "$mode_spotify_controls"
+
 # Abrunacci's Shortcuts
+bindsym Ctrl+Mod1+l exec lock -pf FreeMono-Negrita -t "This aren't the droids you are looking for..." #You need to clone https://github.com/meskarune/i3lock-fancy.git
 bindsym $mod+f exec firefox
 bindsym $mod+g exec google-chrome-stable
 bindsym Ctrl+Mod1+k exec KeeWeb
